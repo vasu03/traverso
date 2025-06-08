@@ -12,7 +12,10 @@ import { useTraversal } from "../hooks/use-traversal";
 import { MAX_COLS, MAX_ROWS } from "../utils/constant";
 
 // Import custom helper functions
-import { checkIfStartOrEnd, createNewGrid } from "../utils/helper-functions";
+import { checkIfStartOrEnd } from "../utils/helper-functions";
+
+// Import custom utility functions
+import { createNewGrid } from "../utils/utility-functions";
 
 // A grid component for visualizing traversal
 export const Grid = ({ isVisualizationRunningRef }: { isVisualizationRunningRef: RefObject<boolean> }) => {

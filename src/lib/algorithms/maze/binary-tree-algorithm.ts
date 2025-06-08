@@ -2,7 +2,10 @@
 import type { GridType, SpeedType, TileType } from "../../../utils/type";
 
 // Import custom helper functions
-import { createWall, destroyWall, getRandomInt, isEqualTile, sleep } from "../../../utils/helper-functions";
+import { getRandomInt, isEqualTile, sleep } from "../../../utils/helper-functions";
+
+// Import custom utility functions
+import { createWall, destroyWall } from "../../../utils/utility-functions";
 
 // Import custom constants
 import { MAX_COLS, MAX_ROWS } from "../../../utils/constant";

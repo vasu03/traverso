@@ -7,8 +7,8 @@ import type { AlgorithmType, GridType, MazeType } from "../utils/type";
 // Import custom constants
 import { END_TILE_CONFIG, START_TILE_CONFIG } from "../utils/constant";
 
-// Import custom helper functions
-import { createGrid } from "../utils/helper-functions";
+// Import custom utility functions
+import { createGrid } from "../utils/utility-functions";
 
 // Define the interface for Traversal Context
 interface TraversalContextInterface {
