@@ -2,7 +2,7 @@
 import type { GridType, SpeedType, TileType } from "./type";
 
 // Import custom constants
-import { BASE_TILE_STYLE, END_TILE_CONFIG, MAX_COLS, MAX_ROWS, SELECT_SPEED_LIST, START_TILE_CONFIG, WALL_TILE_STYLE } from "./constant";
+import { BASE_TILE_STYLE, END_TILE_CONFIG, MAX_COLS, MAX_ROWS, SELECT_SPEED_LIST, SLEEP_TIME, START_TILE_CONFIG, WALL_TILE_STYLE } from "./constant";
 
 // Import custom helper functions
 import { isEqualRowCol, isEqualTile, sleep } from "./helper-functions";
@@ -124,10 +124,10 @@ export const destroyWall = async (grid: GridType, row: number, col: number, isRi
 // Utility function to construct a constrain broder for Recursive-Division
 export const constructRDBorder = async (grid: GridType, startTile: TileType, endTile: TileType) => {
     const shape = [
-        {row: 0, col: 1},
-        {row: 1, col: 0},
-        {row: 0, col: -1},
-        {row: -1, col: 0},
+        { row: 0, col: 1 },
+        { row: 1, col: 0 },
+        { row: 0, col: -1 },
+        { row: -1, col: 0 },
     ];
 
     let row = 0, col = 0;
@@ -140,8 +140,21 @@ export const constructRDBorder = async (grid: GridType, startTile: TileType, end
         ) {
             if (!isEqualTile(grid[row][col], startTile) && !isEqualTile(grid[row][col], endTile)) {
                 grid[row][col].isWall = true;
+                const tileElement = document.getElementById(`${row}-${col}`);
+                if (tileElement) {
+                    tileElement.classList.add(...WALL_TILE_STYLE.split(" "), "animate-wall");
+                }
+                await sleep(SLEEP_TIME);
             }
+            row += direction.row;
+            col += direction.col;
         }
-    }
 
+        // position correction for next iteration over
+        if (row < 0) row = 0;
+        if (row >= MAX_ROWS) row = MAX_ROWS - 1;
+        if (col < 0) col = 0;
+        if (col >= MAX_COLS) col = MAX_COLS - 1;
+    }
 };
+

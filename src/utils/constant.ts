@@ -32,17 +32,13 @@ export const END_TILE_CONFIG = {
 };
 
 // Tailwind styling for the tiles on grid
-export const BASE_TILE_STYLE = (`
-    lg:w-[16px] md:w-[14px] xs:w-[8px] w-[7px]
-    lg:h-[16px] md:h-[14px] xs:h-[8px] h-[7px]
-    border-t border-r border-slate-400/80
-`);
+export const BASE_TILE_STYLE = ("lg:w-[17px] md:w-[14px] sm:w-[12px] w-[10px] lg:h-[17px] md:h-[14px] sm:h-[12px] h-[10px] border-t border-r border-slate-400/80 ");
 
-export const START_TILE_STYLE = BASE_TILE_STYLE + (`bg-green-500 !border-green-500`);
-export const END_TILE_STYLE = BASE_TILE_STYLE + (`bg-red-500 !border-red-500`);
-export const TRAVERSED_TILE_STYLE = BASE_TILE_STYLE + (`bg-cyan-400`);
-export const WALL_TILE_STYLE = BASE_TILE_STYLE + (`bg-gray-600/90`);
-export const PATH_TILE_STYLE = BASE_TILE_STYLE + (`bg-teal-600`);
+export const START_TILE_STYLE = BASE_TILE_STYLE + ("bg-green-500 !border-green-500");
+export const END_TILE_STYLE = BASE_TILE_STYLE + ("bg-red-500 !border-red-500");
+export const TRAVERSED_TILE_STYLE = BASE_TILE_STYLE + ("bg-cyan-400");
+export const WALL_TILE_STYLE = BASE_TILE_STYLE + ("bg-gray-600/90");
+export const PATH_TILE_STYLE = BASE_TILE_STYLE + ("bg-teal-600");
 
 // Different types of MAZE available for visualization
 export const SELECT_MAZE_LIST: MazeSelectType[] = [
