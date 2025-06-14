@@ -20,7 +20,7 @@ const App = () => {
 			<TileProvider>
 				<SpeedProvider>
 					<main className="h-screen w-screen max-h-screen max-w-screen flex flex-col">
-						<Navbar />
+						<Navbar isVisualizationRunningRef={isVisualizationRunningRef} />
 						<Grid isVisualizationRunningRef={isVisualizationRunningRef} />
 					</main>
 				</SpeedProvider>

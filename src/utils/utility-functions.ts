@@ -2,7 +2,7 @@
 import type { GridType, SpeedType, TileType } from "./type";
 
 // Import custom constants
-import { BASE_TILE_STYLE, END_TILE_CONFIG, MAX_COLS, MAX_ROWS, SELECT_SPEED_LIST, SLEEP_TIME, START_TILE_CONFIG, WALL_TILE_STYLE } from "./constant";
+import { BASE_TILE_STYLE, END_TILE_CONFIG, EXTENDED_SLEEP_TIME, MAX_COLS, MAX_ROWS, PATH_TILE_STYLE, SELECT_SPEED_LIST, SLEEP_TIME, START_TILE_CONFIG, TRAVERSED_TILE_STYLE, WALL_TILE_STYLE } from "./constant";
 
 // Import custom helper functions
 import { isEqualRowCol, isEqualTile, sleep } from "./helper-functions";
@@ -70,13 +70,13 @@ export const resetGrid = (grid: GridType, startTile: TileType = START_TILE_CONFI
             // check if niether the first or last tile
             if (!isEqualTile(startTile, tile) && !isEqualTile(endTile, tile)) {
                 const tileElement = document.getElementById(`${tile.row}-${tile.col}`);
-                // if this tile givenelement exists then reset the stylings
+                // if this tile given element exists then reset the stylings
                 if (tileElement) {
-                    tileElement.classList = BASE_TILE_STYLE;
+                    tileElement.className = BASE_TILE_STYLE;
                     if (tile.row === MAX_ROWS - 1) {
-                        tileElement.classList.add("border-b");
+                        tileElement?.classList.add("border-b");
                     } else if (tile.col === 0) {
-                        tileElement.classList.add("border-l");
+                        tileElement?.classList.add("border-l");
                     }
                 }
             }
@@ -95,7 +95,10 @@ export const createWall = (startTile: TileType, endTile: TileType, speed: SpeedT
                 if (row % 2 === 0 || col % 2 === 0) {
                     if (!isEqualRowCol(row, col, startTile) && !isEqualRowCol(row, col, endTile)) {
                         setTimeout(() => {
-                            document.getElementById(`${row}-${col}`)!.className = `${WALL_TILE_STYLE}`
+                            const element = document.getElementById(`${row}-${col}`);
+                            if (element) {
+                                element!.classList.add(...WALL_TILE_STYLE.split(" "), "animate-wall");
+                            }
                         }, delay * col);
                     }
                 }
@@ -150,7 +153,7 @@ export const constructRDBorder = async (grid: GridType, startTile: TileType, end
             col += direction.col;
         }
 
-        // position correction for next iteration over
+        // position correction for next iteration
         if (row < 0) row = 0;
         if (row >= MAX_ROWS) row = MAX_ROWS - 1;
         if (col < 0) col = 0;
@@ -158,3 +161,39 @@ export const constructRDBorder = async (grid: GridType, startTile: TileType, end
     }
 };
 
+// Utility function to animate the Path finding process
+export const animatePath = (traversedTiles: TileType[], path: TileType[], startTile: TileType, endTile: TileType, speed: SpeedType) => {
+    // Get the selected Speed value for visualization
+    const speedValue = SELECT_SPEED_LIST.find(s => s.value === speed)!.value;
+    // Create a Set for faster path tile lookup
+    // const pathSet = new Set(path.map(tile => `${tile.row}-${tile.col}`));
+
+    // animate traversed tiles
+    traversedTiles.forEach((tile, i) => {
+        setTimeout(() => {
+            if (isEqualTile(tile, startTile) || isEqualTile(tile, endTile)) return;
+            const element = document.getElementById(`${tile.row}-${tile.col}`);
+            if (element) {
+                // Apply traversed style to ALL tiles including path tiles
+                element.className = `${TRAVERSED_TILE_STYLE} animate-traversed`;
+            }
+        }, SLEEP_TIME * i * speedValue);
+    });
+
+    // time when traversal ends
+    const traverseEnd = SLEEP_TIME * traversedTiles.length * speedValue;
+    
+    // animate path tiles
+    setTimeout(() => {
+        path.forEach((tile, i) => {
+            setTimeout(() => {
+                if (isEqualTile(tile, startTile) || isEqualTile(tile, endTile)) return;
+                const element = document.getElementById(`${tile.row}-${tile.col}`);
+                if (element) {
+                    // Override with path style for path tiles
+                    element.className = `${PATH_TILE_STYLE} animate-path`;
+                }
+            }, EXTENDED_SLEEP_TIME * i * speedValue);
+        });
+    }, traverseEnd);
+};

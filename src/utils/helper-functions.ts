@@ -1,5 +1,5 @@
 // Import custom types
-import type { TileType } from "./type";
+import type { GridType, TileType } from "./type";
 
 // Import custom constants
 import { MAX_COLS, MAX_ROWS } from "./constant";
@@ -32,4 +32,27 @@ export const getRandomInt = (min: number, max: number) => {
     max = Math.floor(max);
 
     return Math.floor(Math.random() * (max - min) + min);
+};
+
+// Helper function to get the Untraversed neighbours of a node
+export const getUntraversedNeighbours = (grid: GridType, tile: TileType) => {
+    // destructure the row and col from given tile
+    const { row, col } = tile;
+    // an array to store the neighbours
+    const neighbours = [];
+
+    if (row > 0) neighbours.push(grid[row - 1][col]);
+    if (row < MAX_ROWS - 1) neighbours.push(grid[row + 1][col]);
+    if (col > 0) neighbours.push(grid[row][col - 1]);
+    if (col < MAX_COLS - 1) neighbours.push(grid[row][col + 1]);
+
+    return neighbours.filter((neighbour) => !neighbour.isTraversed);
+};
+
+// Helper function to check if a node is in BFS queue or not
+export const isInQueue = (tile: TileType, queue: TileType[]) => {
+    for (let i = 0; i < queue.length; i++) {
+        if (isEqualTile(tile, queue[i])) return true;
+    }
+    return false;
 };

@@ -1,10 +1,11 @@
 // // Import required modules
 
 // Import custom components
+import type { RefObject } from "react";
 import { SettingsMenu } from "./SettingsMenu";
 
 // A navbar component for app
-export const Navbar = () => {
+export const Navbar = ({ isVisualizationRunningRef }: { isVisualizationRunningRef: RefObject<boolean> }) => {
 
     // TSX to render the component
     return (
@@ -15,8 +16,8 @@ export const Navbar = () => {
                 </span>
                 <span className="text-[9px] tracking-wider text-center text-neutral-300">Making invisible, visible</span>
             </div>
-            <div className="w-[50%] p-1">
-                <SettingsMenu />
+            <div className="w-[75%] p-1">
+                <SettingsMenu isVisualizationRunningRef={isVisualizationRunningRef} />
             </div>
         </nav>
     );

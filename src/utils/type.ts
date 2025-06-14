@@ -1,11 +1,14 @@
 // Define the Type for various algorithms to be used for visualisation
-export type AlgorithmType = "DIJKSTRA" | "BFS" | "DFS" | "A_START";
+export type AlgorithmType = "DIJKSTRA" | "BFS" | "DFS" | "A_STAR";
+
+// An interface for Algorithm selection types
+export interface AlgorithmSelectionType { name: string, value: AlgorithmType };
 
 // Define the Type for traversal Maze
 export type MazeType = "NONE" | "RECURSIVE_DIVISION" | "BINARY_TREE";
 
 // An interface for Maze selection types
-export interface MazeSelectType { name: string, value: string };
+export interface MazeSelectType { name: string, value: MazeType };
 
 // Define the Type for the Tiles in the maze grid
 export type TileType = {

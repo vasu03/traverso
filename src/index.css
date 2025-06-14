@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;…&display=swap');
 
 /* Import the Tailwind CSS utilities */
 @import "tailwindcss";
@@ -10,10 +10,74 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #242424; /* dark gray */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@theme {
+  --animate-traversed: traversed 0.5s cubic-bezier(0, 0, 0.2, 1);
+  --animate-path: path 1.5s cubic-bezier(0, 0, 0.2, 1);
+  --animate-wall: wall 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @keyframes traversed {
+    0% {
+      transform: scale(0.3);
+      /* purple-600 */
+      background-color: #9810fabf;  
+      border-radius: 100%;
+    }
+    50% {
+      /* indigo-600 */
+      background-color: #4f39f6bf;
+    }
+    75% {
+      transform: scale(1.2);
+      /* blue-500 */
+      background-color: #2b7fffbf;
+    }
+    100% {
+      transform: scale(1);
+      /* cyan-400 */
+      background-color: #00d3f2;
+    }
+  }
+
+  @keyframes path {
+    0% {
+      transform: scale(0.3);
+      /* red-600 */
+      background-color: #e7000bbf;
+      border-radius: 100%;
+    }
+    50% {
+      /* orange-600 */
+      background-color: #f54a00bf;
+    }
+    75% {
+      transform: scale(1.2);
+      /* orange-400 */
+      background-color: #ff8904bf;
+    }
+    90% {
+      transform: scale(0.8);
+      /* amber-200 */
+      background-color: #fee685;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes wall {
+    0% {
+      transform: scale(0.7);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 }

@@ -1,5 +1,5 @@
 // Import custom types
-import type { MazeSelectType, SpeedSelectType } from "./type";
+import type { AlgorithmSelectionType, MazeSelectType, SpeedSelectType } from "./type";
 
 // Maximmum number of rows & cols in the grid
 export const MAX_ROWS: number = 39;
@@ -38,13 +38,21 @@ export const START_TILE_STYLE = BASE_TILE_STYLE + ("bg-green-500 !border-green-5
 export const END_TILE_STYLE = BASE_TILE_STYLE + ("bg-red-500 !border-red-500");
 export const TRAVERSED_TILE_STYLE = BASE_TILE_STYLE + ("bg-cyan-400");
 export const WALL_TILE_STYLE = BASE_TILE_STYLE + ("bg-gray-600/90");
-export const PATH_TILE_STYLE = BASE_TILE_STYLE + ("bg-teal-600");
+export const PATH_TILE_STYLE = BASE_TILE_STYLE + ("bg-orange-200");
 
 // Different types of MAZE available for visualization
 export const SELECT_MAZE_LIST: MazeSelectType[] = [
     { name: "No Maze", value: "NONE" },
     { name: "Binary Tree", value: "BINARY_TREE" },
     { name: "Recursive Division", value: "RECURSIVE_DIVISION" }
+];
+
+// Differen types of Traversal algorithms
+export const SELECT_ALGORITHM_LIST: AlgorithmSelectionType[] = [
+    { name: "BFS", value: "BFS" },
+    { name: "DFS", value: "DFS" },
+    { name: "Dijkstra", value: "DIJKSTRA" },
+    { name: "A*", value: "A_STAR" },
 ];
 
 // Level of speeds for visualization

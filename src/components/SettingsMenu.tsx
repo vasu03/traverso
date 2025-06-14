@@ -1,33 +1,34 @@
 // Import required modules
-import { useState } from "react";
+import { useState, type RefObject } from "react";
 
 // Import custom components
 import { PlayButton } from "./PlayButton";
 import { Select } from "./Select";
 
 // Import custom constants
-import { SELECT_MAZE_LIST } from "../utils/constant";
+import { EXTENDED_SLEEP_TIME, SELECT_ALGORITHM_LIST, SELECT_MAZE_LIST, SELECT_SPEED_LIST, SLEEP_TIME } from "../utils/constant";
 
 // Import custom types
-import type { MazeType } from "../utils/type";
+import type { AlgorithmType, MazeType, SpeedType } from "../utils/type";
 
 // Import custom utility functions 
-import { resetGrid } from "../utils/utility-functions";
+import { animatePath, resetGrid } from "../utils/utility-functions";
 import { runMazeAlgorithm } from "../utils/run-maze-algorithm";
 
 // Import custom hooks
 import { useTraversal } from "../hooks/use-traversal";
 import { useTile } from "../hooks/use-tile";
 import { useSpeed } from "../hooks/use-speed";
+import { runTraversalAlgorithm } from "../utils/run-traversal-algorithm";
 
 // A Menu component which allows setting different parameters for visualization
-export const SettingsMenu = () => {
+export const SettingsMenu = ({ isVisualizationRunningRef }: { isVisualizationRunningRef: RefObject<boolean> }) => {
     // get the required states from TraversalContext
-    const { maze, setMaze, grid, setGrid, setIsGraphVisualized } = useTraversal();
+    const { maze, setMaze, grid, setGrid, isGraphVisualized, setIsGraphVisualized, algorithm, setAlgorithm } = useTraversal();
     // get the Start and End tile from TileContext
     const { startTile, endTile } = useTile();
     // get the speed from SpeedContext
-    const { speed } = useSpeed();
+    const { speed, setSpeed } = useSpeed();
 
     // state to handle the Disabling feature
     const [isDisabled, setIsDisabled] = useState<boolean>(false);
@@ -52,6 +53,44 @@ export const SettingsMenu = () => {
         setIsGraphVisualized(false);
     };
 
+    // function to handle the running of visualization process
+    const handleRunVisualizer = () => {
+        if (isGraphVisualized) {
+            setIsGraphVisualized(false);
+            resetGrid(grid.slice(), startTile, endTile);
+            return;
+        }
+
+        // execute the selected traversal algorithm
+        const { traversedTiles, path } = runTraversalAlgorithm(algorithm, grid, startTile, endTile);
+        
+        // apply the animation while visualizing
+        animatePath(traversedTiles, path, startTile, endTile, speed);
+        setIsDisabled(true);
+        isVisualizationRunningRef.current = true;
+
+        // Reset the grid with changes made by traversal algorithm
+        const speedValue = SELECT_SPEED_LIST.find(s => s.value === speed)!.value;
+        const totalDuration =
+            SLEEP_TIME * traversedTiles.length * speedValue +
+            EXTENDED_SLEEP_TIME * path.length * speedValue +
+            1000;
+
+        setTimeout(() => {
+            // Create a new grid with updated path state
+            const newGrid = grid.map(row => row.map(tile => {
+                // Preserve path state for path tiles
+                const isInPath = path.some(p => p.row === tile.row && p.col === tile.col);
+                return isInPath ? { ...tile, isPath: true, isTraversed: false } : tile;
+            }));
+
+            setGrid(newGrid);
+            setIsGraphVisualized(true);
+            setIsDisabled(false);
+            isVisualizationRunningRef.current = false;
+        }, totalDuration);
+    };
+
     // TSX to render the component
     return (
         <nav className="flex items-center justify-center gap-4 w-full p-1">
@@ -63,7 +102,27 @@ export const SettingsMenu = () => {
                     handleGenerateMaze(e.target.value as MazeType);
                 }}
             />
-            {/* <PlayButton /> */}
+            <Select
+                label="Algorithm"
+                value={algorithm}
+                options={SELECT_ALGORITHM_LIST}
+                onChange={(e) => {
+                    setAlgorithm(e.target.value as AlgorithmType);
+                }}
+            />
+            <Select
+                label="Speed"
+                value={speed}
+                options={SELECT_SPEED_LIST}
+                onChange={(e) => {
+                    setSpeed(parseFloat(e.target.value) as SpeedType);
+                }}
+            />
+            <PlayButton
+                isDisabled={isDisabled}
+                isGraphVisualized={isGraphVisualized}
+                handleRunVisualizer={handleRunVisualizer}
+            />
         </nav>
     );
 };  
