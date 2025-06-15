@@ -55,15 +55,19 @@ export const SettingsMenu = ({ isVisualizationRunningRef }: { isVisualizationRun
 
     // function to handle the running of visualization process
     const handleRunVisualizer = () => {
+        // If the graph is already visualized then reset to default configs
         if (isGraphVisualized) {
             setIsGraphVisualized(false);
+            setMaze("NONE");
+            setAlgorithm("BFS");
+            setSpeed(1);
             resetGrid(grid.slice(), startTile, endTile);
             return;
         }
 
         // execute the selected traversal algorithm
         const { traversedTiles, path } = runTraversalAlgorithm(algorithm, grid, startTile, endTile);
-        
+
         // apply the animation while visualizing
         animatePath(traversedTiles, path, startTile, endTile, speed);
         setIsDisabled(true);
@@ -74,7 +78,7 @@ export const SettingsMenu = ({ isVisualizationRunningRef }: { isVisualizationRun
         const totalDuration =
             SLEEP_TIME * traversedTiles.length * speedValue +
             EXTENDED_SLEEP_TIME * path.length * speedValue +
-            1000;
+            1500;
 
         setTimeout(() => {
             // Create a new grid with updated path state
