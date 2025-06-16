@@ -65,3 +65,12 @@ export const isInStack = (tile: TileType, stack: TileType[]): boolean => {
     return false;
 };
 
+// Helper function to drop a given node from the queue
+export const dropFromQueue = (tile: TileType, queue: TileType[]) => {
+    for (let i = 0; i < queue.length; i++) {
+        if (isEqualTile(tile, queue[i])) {
+            queue.splice(i, 1);
+            break;
+        }
+    }
+}
