@@ -74,3 +74,38 @@ export const dropFromQueue = (tile: TileType, queue: TileType[]) => {
         }
     }
 }
+
+// Helper function to get all the Non-Wall neighbours of a given node
+export const getNonWallNeighbours = (grid: GridType, tile: TileType) => {
+    // destructure the row and col from given tile
+    const { row, col } = tile;
+    // An array to store all the neighbours
+    const neighbours = [];
+
+    if (row > 0) neighbours.push(grid[row - 1][col]);
+    if (row < MAX_ROWS - 1) neighbours.push(grid[row + 1][col]);
+    if (col > 0) neighbours.push(grid[row][col - 1]);
+    if (col < MAX_COLS - 1) neighbours.push(grid[row][col + 1]);
+    return neighbours.filter(neighbour => !neighbour.isWall);
+};
+
+// Helper function to detect any negative cycles for Bellman-Ford algo (unlikely to have any in grids)
+export const detectNegativeCycle = (grid: GridType): boolean => {
+    for (let row = 0; row < MAX_ROWS; row++) {
+        for (let col = 0; col < MAX_COLS; col++) {
+            // get the current tile 
+            const tile = grid[row][col];
+            // skip the tile if its wall or if its unreachable
+            if (tile.isWall || tile.distance === Infinity) continue;
+            // Get all the Non-Wall neighbours of current tile
+            const neighbours = getNonWallNeighbours(grid, tile);
+            // check for a negative cycle
+            for (const neighbour of neighbours) {
+                if (tile.distance + 1 < neighbour.distance) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+};

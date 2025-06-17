@@ -112,15 +112,15 @@ export const destroyWall = async (grid: GridType, row: number, col: number, isRi
     if (isRight && grid[row][col + 1]) {
         grid[row][col + 1].isWall = false;
         document.getElementById(`${row}-${col + 1}`)!.className = BASE_TILE_STYLE;
-        await sleep(20 * SELECT_SPEED_LIST.find((s) => s.value === speed)!.value - 8);
+        await sleep(20 * SELECT_SPEED_LIST.find((s) => s.value === speed)!.value - 12);
     } else if (grid[row + 1]) {
         grid[row + 1][col].isWall = false;
         document.getElementById(`${row + 1}-${col}`)!.className = BASE_TILE_STYLE;
-        await sleep(20 * SELECT_SPEED_LIST.find((s) => s.value === speed)!.value - 8);
+        await sleep(20 * SELECT_SPEED_LIST.find((s) => s.value === speed)!.value - 12);
     } else {
         grid[row][col].isWall = false;
         document.getElementById(`${row}-${col}`)!.className = BASE_TILE_STYLE;
-        await sleep(20 * SELECT_SPEED_LIST.find((s) => s.value === speed)!.value - 8);
+        await sleep(20 * SELECT_SPEED_LIST.find((s) => s.value === speed)!.value - 12);
     }
 };
 

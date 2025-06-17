@@ -5,6 +5,7 @@ import type { AlgorithmType, GridType, TileType } from "./type";
 import { bfs } from "../lib/algorithms/traversal/breadth-first-search";
 import { dfs } from "../lib/algorithms/traversal/depth-first-search";
 import { dijkstra } from "../lib/algorithms/traversal/dijkstra";
+import { bellmanFord } from "../lib/algorithms/traversal/bellman-ford";
 
 // function to start execution of traversal algorithm as selected
 export const runTraversalAlgorithm = (
@@ -14,7 +15,7 @@ export const runTraversalAlgorithm = (
     endTile: TileType
 ) => {
     switch (algorithm) {
-        case "BFS": {
+        case "BFS": {  
             return bfs(grid, startTile, endTile);
         }
         case "DFS": {
@@ -22,6 +23,9 @@ export const runTraversalAlgorithm = (
         }
         case "DIJKSTRA": {
             return dijkstra(grid, startTile, endTile);
+        }
+        case "BELLMAN_FORD": {
+            return bellmanFord(grid, startTile, endTile);
         } 
         default: {
             return bfs(grid, startTile, endTile);

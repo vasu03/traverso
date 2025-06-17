@@ -2,8 +2,8 @@
 import type { AlgorithmSelectionType, MazeSelectType, SpeedSelectType } from "./type";
 
 // Maximmum number of rows & cols in the grid
-export const MAX_ROWS: number = 39;
-export const MAX_COLS: number = 49;
+export const MAX_ROWS: number = 47;
+export const MAX_COLS: number = 79;
 
 // Configs for a START_TILE on grid
 export const START_TILE_CONFIG = {
@@ -32,7 +32,7 @@ export const END_TILE_CONFIG = {
 };
 
 // Tailwind styling for the tiles on grid
-export const BASE_TILE_STYLE = ("lg:w-[17px] md:w-[14px] sm:w-[12px] w-[10px] lg:h-[17px] md:h-[14px] sm:h-[12px] h-[10px] border-t border-r border-slate-400/80 ");
+export const BASE_TILE_STYLE = ("lg:w-[16px] md:w-[14px] sm:w-[12px] w-[10px] lg:h-[16px] md:h-[14px] sm:h-[12px] h-[10px] border-t border-r border-slate-400/80 ");
 
 export const START_TILE_STYLE = BASE_TILE_STYLE + ("bg-green-500 !border-green-500");
 export const END_TILE_STYLE = BASE_TILE_STYLE + ("bg-red-500 !border-red-500");
@@ -44,7 +44,7 @@ export const PATH_TILE_STYLE = BASE_TILE_STYLE + ("bg-orange-200");
 export const SELECT_MAZE_LIST: MazeSelectType[] = [
     { name: "No Maze", value: "NONE" },
     { name: "Binary Tree", value: "BINARY_TREE" },
-    { name: "Recursive Division", value: "RECURSIVE_DIVISION" }
+    { name: "Recursive Division", value: "RECURSIVE_DIVISION" },
 ];
 
 // Differen types of Traversal algorithms
@@ -52,6 +52,7 @@ export const SELECT_ALGORITHM_LIST: AlgorithmSelectionType[] = [
     { name: "BFS", value: "BFS" },
     { name: "DFS", value: "DFS" },
     { name: "Dijkstra", value: "DIJKSTRA" },
+    { name: "Bellman Ford", value: "BELLMAN_FORD" },
     { name: "A*", value: "A_STAR" },
 ];
 

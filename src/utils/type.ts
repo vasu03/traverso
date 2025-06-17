@@ -1,5 +1,5 @@
 // Define the Type for various algorithms to be used for visualisation
-export type AlgorithmType = "DIJKSTRA" | "BFS" | "DFS" | "A_STAR";
+export type AlgorithmType = "DIJKSTRA" | "BELLMAN_FORD" | "BFS" | "DFS" | "A_STAR";
 
 // An interface for Algorithm selection types
 export interface AlgorithmSelectionType { name: string, value: AlgorithmType };
