@@ -109,3 +109,55 @@ export const detectNegativeCycle = (grid: GridType): boolean => {
     }
     return false;
 };
+
+// Helper function to initialize the heuristic cost [ h(n) ] for A-Star
+export const initHeuristicCost = (grid: GridType, endTile: TileType) => {
+    // an 2D array to store all the heuristic costs
+    const heuristicCost = [];
+    // loop over each row of grid
+    for (let row = 0; row < MAX_ROWS; row++) {
+        // array to store the heuristic for current row
+        const rowHeuristic = [];
+        // loop over each col of grid
+        for (let col = 0; col < MAX_COLS; col++) {
+            // calculate and add heuristic cost for current tile
+            rowHeuristic.push(retrieveHeuristicCost(grid[row][col], endTile));
+        }
+        // add the heuristic of current row to total heuristic cost
+        heuristicCost.push(rowHeuristic);
+    }
+    // return the 2D array of heuristic cost
+    return heuristicCost;
+};
+
+// Helper function to retrieve the heuristic cost of given tile
+export const retrieveHeuristicCost = (tile: TileType, endTile: TileType) => {
+    // a constant multiplier for manhatten distance
+    const manhattenMultiplier = 1;
+    // Calculate the absolute difference in rows between the current tile and the end tile
+    const row = Math.abs(tile.row - endTile.row);
+    // Calculate the absolute difference in cols between the current tile and the end tile
+    const col = Math.abs(tile.col - endTile.col);
+    // return the manhatten distance
+    return manhattenMultiplier * (row + col);
+};
+
+// Helper function to initialize the Function cost [ f(n) ] for A-star
+export const initFunctionCost = () => {
+    // an 2D array to store all the function cost
+    const functionCost = [];
+    // loop over each row of grid
+    for (let row = 0; row < MAX_COLS; row++) {
+        // array to store the function cost of each row
+        const rowFunction = [];
+        // loop over each col of grid
+        for (let col = 0; col < MAX_COLS; col++) {
+            // set initial funcitonal cost to infinity
+            rowFunction.push(Infinity);
+        }
+        // add the function cost of current row to total function cost
+        functionCost.push(rowFunction);
+    }
+    // return 2D array of function cost
+    return functionCost;
+};

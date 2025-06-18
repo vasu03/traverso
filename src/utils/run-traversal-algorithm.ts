@@ -6,6 +6,7 @@ import { bfs } from "../lib/algorithms/traversal/breadth-first-search";
 import { dfs } from "../lib/algorithms/traversal/depth-first-search";
 import { dijkstra } from "../lib/algorithms/traversal/dijkstra";
 import { bellmanFord } from "../lib/algorithms/traversal/bellman-ford";
+import { aStar } from "../lib/algorithms/traversal/a-star";
 
 // function to start execution of traversal algorithm as selected
 export const runTraversalAlgorithm = (
@@ -26,7 +27,10 @@ export const runTraversalAlgorithm = (
         }
         case "BELLMAN_FORD": {
             return bellmanFord(grid, startTile, endTile);
-        } 
+        }
+        case "A_STAR": {
+            return aStar(grid, startTile, endTile);
+        }
         default: {
             return bfs(grid, startTile, endTile);
         }
