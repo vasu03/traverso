@@ -5,7 +5,7 @@ export type AlgorithmType = "DIJKSTRA" | "BELLMAN_FORD" | "BFS" | "DFS" | "A_STA
 export interface AlgorithmSelectionType { name: string, value: AlgorithmType };
 
 // Define the Type for traversal Maze
-export type MazeType = "NONE" | "RECURSIVE_DIVISION" | "BINARY_TREE";
+export type MazeType = "NONE" | "RECURSIVE_DIVISION" | "BINARY_TREE" | "HORIZONTAL_RECURSIVE_DIVISION" | "VERTICAL_RECURSIVE_DIVISION" | "LINKED_LADDER";
 
 // An interface for Maze selection types
 export interface MazeSelectType { name: string, value: MazeType };

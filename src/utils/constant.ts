@@ -45,15 +45,18 @@ export const SELECT_MAZE_LIST: MazeSelectType[] = [
     { name: "No Maze", value: "NONE" },
     { name: "Binary Tree", value: "BINARY_TREE" },
     { name: "Recursive Division", value: "RECURSIVE_DIVISION" },
+    { name: "Horizontal Recursive Division", value: "HORIZONTAL_RECURSIVE_DIVISION" },
+    { name: "Vertical Recursive Division", value: "VERTICAL_RECURSIVE_DIVISION" },
+    { name: "Linked Ladders", value: "LINKED_LADDER" },
 ];
 
 // Differen types of Traversal algorithms
 export const SELECT_ALGORITHM_LIST: AlgorithmSelectionType[] = [
-    { name: "BFS", value: "BFS" },
-    { name: "DFS", value: "DFS" },
+    { name: "Breadth First Search", value: "BFS" },
+    { name: "Depth First Search", value: "DFS" },
     { name: "Dijkstra", value: "DIJKSTRA" },
     { name: "Bellman Ford", value: "BELLMAN_FORD" },
-    { name: "A*", value: "A_STAR" },
+    { name: "A Star", value: "A_STAR" },
 ];
 
 // Level of speeds for visualization
