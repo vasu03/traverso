@@ -6,6 +6,7 @@ import { binaryTreeAlgorithm } from "../lib/algorithms/maze/binary-tree-algorith
 import { recursiveDivisionAlgorithm } from "../lib/algorithms/maze/recursive-division-algorithm";
 import { horizontalRecursiveDivision } from "../lib/algorithms/maze/horizontal-recursive-division";
 import { verticalRecursiveDivision } from "../lib/algorithms/maze/vertical-recursive-division";
+import { linkedLadderAlgorithm } from "../lib/algorithms/maze/linked-ladder";
 
 // Import custom utility functions
 import { constructRDBorder } from "./utility-functions";
@@ -65,5 +66,12 @@ export const runMazeAlgorithm = async (
         setTimeout(() => {
             setIsDisabled(false);
         }, 800 * currSpeed);
+    }
+
+    if (maze === "LINKED_LADDER") {
+        // get the current speed
+        const currSpeed = SELECT_SPEED_LIST.find((s) => s.value === speed)!.value ?? 2;
+
+        await linkedLadderAlgorithm(grid, startTile, endTile, currSpeed, setIsDisabled);
     }
 };
