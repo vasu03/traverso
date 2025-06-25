@@ -60,7 +60,7 @@ export const Grid = ({ isVisualizationRunningRef }: { isVisualizationRunningRef:
     return (
         <div className={twMerge(
             // Base classes
-            "flex flex-col items-center justify-center h-full",
+            "flex flex-col items-center justify-center h-fit w-fit mx-auto my-2",
             // Grid heights for responsive behavior
             `lg:min-h-[${MAX_ROWS * 16}px] md:min-h-[${MAX_ROWS * 14}px] xs:min-h-[${MAX_ROWS * 8}px] min-h-[${MAX_ROWS * 7}px]`,
             // Grid widths for responsive behavior

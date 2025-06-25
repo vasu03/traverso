@@ -29,17 +29,13 @@ export const Tile = ({ row, col, isStart, isEnd, isTraversed, isWall, isPath, ha
     else if (isPath) tile_style_type = PATH_TILE_STYLE;
     else tile_style_type = BASE_TILE_STYLE;
 
-    // Styling for borders & edges based on its type
-    const border_style = (row === MAX_ROWS - 1 ? 'border-b' : col === 0 ? "border-l" : "");
-    const edge_Style = (row === MAX_ROWS - 1 && col === 0 ? "border-l" : "");
-
     // TSX to render the component 
     return (
         <div
             onMouseDown={() => handleMousePressed(row, col)}
             onMouseUp={() => handleMouseReleased(row, col)}
             onMouseEnter={() => handleMouseEnter(row, col)}
-            className={twMerge(tile_style_type, border_style, edge_Style)}
+            className={twMerge(tile_style_type, "")}
             id={`${row}-${col}`}
         />
     );

@@ -97,7 +97,7 @@ export const SettingsMenu = ({ isVisualizationRunningRef }: { isVisualizationRun
 
     // TSX to render the component
     return (
-        <nav className="flex items-center justify-center gap-4 w-full p-1">
+        <nav className="flex items-center justify-end gap-4 w-full p-1">
             <Select
                 label="Maze Type"
                 value={maze}

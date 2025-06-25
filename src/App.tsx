@@ -9,6 +9,7 @@ import { SpeedProvider } from "./contexts/SpeedContext";
 // Import custom components
 import { Navbar } from "./components/Navbar";
 import { Grid } from "./components/Grid";
+import { Footer } from "./components/Footer";
 
 // An React application
 const App = () => {
@@ -19,9 +20,10 @@ const App = () => {
 		<TraversalProvider>
 			<TileProvider>
 				<SpeedProvider>
-					<main className="h-screen w-screen max-h-screen max-w-screen flex flex-col">
+					<main className="h-fit w-[98%] md:w-[95%] mx-auto max-w-screen flex flex-col">
 						<Navbar isVisualizationRunningRef={isVisualizationRunningRef} />
 						<Grid isVisualizationRunningRef={isVisualizationRunningRef} />
+						<Footer />
 					</main>
 				</SpeedProvider>
 			</TileProvider>

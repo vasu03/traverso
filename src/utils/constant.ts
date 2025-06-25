@@ -2,7 +2,7 @@
 import type { AlgorithmSelectionType, MazeSelectType, SpeedSelectType } from "./type";
 
 // Maximmum number of rows & cols in the grid
-export const MAX_ROWS: number = 47;
+export const MAX_ROWS: number = 39;
 export const MAX_COLS: number = 79;
 
 // Configs for a START_TILE on grid
@@ -32,12 +32,12 @@ export const END_TILE_CONFIG = {
 };
 
 // Tailwind styling for the tiles on grid
-export const BASE_TILE_STYLE = ("lg:w-[16px] md:w-[14px] sm:w-[12px] w-[10px] lg:h-[16px] md:h-[14px] sm:h-[12px] h-[10px] border-t border-r border-slate-400/80 ");
+export const BASE_TILE_STYLE = ("border rounded-[2px] m-[1.5px] lg:w-[17px] md:w-[14px] sm:w-[12px] w-[10px] lg:h-[17px] md:h-[14px] sm:h-[12px] h-[10px] border-slate-400/80 ");
 
 export const START_TILE_STYLE = BASE_TILE_STYLE + ("bg-green-500 !border-green-500");
 export const END_TILE_STYLE = BASE_TILE_STYLE + ("bg-red-500 !border-red-500");
 export const TRAVERSED_TILE_STYLE = BASE_TILE_STYLE + ("bg-cyan-400");
-export const WALL_TILE_STYLE = BASE_TILE_STYLE + ("bg-gray-600/90");
+export const WALL_TILE_STYLE = BASE_TILE_STYLE + ("bg-slate-400/50");
 export const PATH_TILE_STYLE = BASE_TILE_STYLE + ("bg-orange-200");
 
 // Different types of MAZE available for visualization

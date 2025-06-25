@@ -16,10 +16,10 @@ export const Select = ({ value, onChange, options, label, isDisabled }: SelectPr
     // TSX to render component
     return (
         <div className="flex flex-col items-start gap-1">
-            <label className="text-xs text-gray-200 ml-1" htmlFor={label}>{label}</label>
+            <label className="text-[11px] text-gray-200 ml-1" htmlFor={label}>{label}</label>
             <select
                 id={label}
-                className="bg-neutral-700 cursor-pointer hover:bg-neutral-700/50 text-gray-300 rounded-md transition-all ease-in active:ring-0 active:border-0 p-2 min-w-[200px] sm:w-full"
+                className="bg-neutral-700 cursor-pointer hover:bg-neutral-700/50 text-gray-300 text-sm rounded-md transition-all ease-in active:ring-0 active:border-0 py-1 px-2 min-w-[200px] sm:w-full"
                 value={value}
                 disabled={isDisabled}
                 onChange={onChange} >
