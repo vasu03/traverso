@@ -2,7 +2,7 @@
 import { twMerge } from "tailwind-merge";
 
 // Import custom constants
-import { BASE_TILE_STYLE, END_TILE_STYLE, MAX_ROWS, PATH_TILE_STYLE, START_TILE_STYLE, TRAVERSED_TILE_STYLE, WALL_TILE_STYLE } from "../utils/constant";
+import { BASE_TILE_STYLE, END_TILE_STYLE, PATH_TILE_STYLE, START_TILE_STYLE, TRAVERSED_TILE_STYLE, WALL_TILE_STYLE } from "../utils/constant";
 
 // Define the props for Tile component
 interface TileProps {
